@@ -1,21 +1,16 @@
 import ReactDOM from "react-dom/client";
 import { Routes, Route, Link } from "react-router-dom";
-import Home from "./components/Home";
+import Signup from "./components/Signup";
+import Navbar from "./components/Navbar";
 import BookList from "./components/BookList";
+import "./index.css";
 
 export default function App() {
   return (
     <>
-      <nav>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/books">Books</Link>
-        </li>
-      </nav>
+      <Navbar></Navbar>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/" element={<Signup />}></Route>
         <Route path="/books" element={<BookList />}></Route>
       </Routes>
     </>
