@@ -1,12 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   return (
     <div className="min-h-screen bg-pink-100 pt-10">
       <div className="flex justify-center items-center">
-        <div className="flex justify-center items-center">
-          
-        </div>
+        <div className="flex justify-center items-center"></div>
         <div className="bg-white w-full max-w-md rounded-lg shadow-lg p-8 space-y-6">
           <div className="text-2xl font-bold text-purple-800 mb-6 flex items-center">
             Sign Up
@@ -112,6 +111,11 @@ const SignUp = () => {
               Create Account
             </button>
           </div>
+          <Link to="/login">
+            <button className="w-full mt-4 bg-purple-800 text-white font-bold py-2 rounded-md hover:bg-purple-700">
+              Login
+            </button>
+          </Link>
         </div>
       </div>
     </div>
