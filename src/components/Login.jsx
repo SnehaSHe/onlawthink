@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-function Login() {
+function Login({ onLoginSuccess }) {
   const [formData, setFormData] = useState({
     emailAddress: "",
     password: "",
     accountType: "user",
   });
 
-  const [alertMessage, setAlertMessage] = useState(""); // State for alert message
+  const [alertMessage, setAlertMessage] = useState(""); 
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -33,6 +33,8 @@ function Login() {
         const data = await response.json();
         if (data.message === "Login successful") {
           setAlertMessage("Login successful");
+          // Call the onLoginSuccess function to update the login status
+          onLoginSuccess();
         } else {
           setAlertMessage("Login failed"); // Handle other responses if needed
         }

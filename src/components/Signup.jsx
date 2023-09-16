@@ -175,7 +175,7 @@ const SignUp = () => {
             <div>
               <button
                 type="submit"
-                className="w-full bg-purple-800 text-white font-bold py-2 rounded-md hover:bg-purple-900"
+                className="w-full bg-purple-800 text-white font-bold py-2 rounded-md hover:bg-purple-900 mt-5"
               >
                 Create Account
               </button>
@@ -183,7 +183,7 @@ const SignUp = () => {
           </form>
           <Link to="/login">
             <button className="w-full mt-4 bg-purple-800 text-white font-bold py-2 rounded-md hover:bg-purple-700">
-              Login
+              Login (If you already have an account)
             </button>
           </Link>
         </div>

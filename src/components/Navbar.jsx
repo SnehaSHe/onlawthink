@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({isLoggedIn}) => {
+  // Initialize isLoggedIn state with true or false based on your initial requirement
+
+
+  // Function to set isLoggedIn to false when Home link is clicked
+  const handleHomeClick = () => {
+    setIsLoggedIn(false);
+  };
+
+  // Function to set isLoggedIn to false when Log Out link is clicked
+  const handleLogoutClick = () => {
+    setIsLoggedIn(false);
+  };
+
   return (
     <nav className="bg-purple-700 text-white p-4 shadow-lg">
       <div className="container mx-auto flex items-center justify-between">
         <Link to="/">
-          <div className="text-xl font-bold text-pink-400">ONLAWTHINK!</div>
+          <div className="text-3xl font-bold text-pink-400">ONLAWTHINK!</div>
         </Link>
         <div className="flex space-x-4">
-          <Link to="/" className="hover:text-pink-400 transition duration-300">
+          {/* Add an onClick handler to the Home link */}
+          <Link
+            to="/"
+            className="hover:text-pink-400 transition duration-300"
+            onClick={handleHomeClick}
+          >
             Home
           </Link>
           <a href="#" className="hover:text-pink-400 transition duration-300">
@@ -24,28 +42,15 @@ const Navbar = () => {
           <a href="#" className="hover:text-pink-400 transition duration-300">
             Help
           </a>
-          <div className="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 hover:text-pink-400 transition duration-300"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          {isLoggedIn ? (
+            <Link
+              to="/"
+              className="hover:text-pink-400 transition duration-300"
+              onClick={handleLogoutClick}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 12a3 3 0 100-6 3 3 0 000 6z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M22 21a10 10 0 11-20 0 10 10 0 0120 0z"
-              />
-            </svg>
-          </div>
+              Log Out
+            </Link>
+          ) : null}
         </div>
       </div>
     </nav>
