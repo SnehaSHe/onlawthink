@@ -4,7 +4,7 @@ import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Signup from "./components/Signup";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
-import Home from "./components/Home";
+import HomeUser from "./components/HomeUser";
 import "./index.css";
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
 
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
-    navigate("/home"); // Redirect to the home page after login
+    navigate("/home-user"); // Redirect to the home page after login
   };
 
   return (
@@ -26,10 +26,10 @@ export default function App() {
           element={<Login onLoginSuccess={handleLoginSuccess} />}
         />
         {isLoggedIn ? (
-          <Route path="/home" element={<Home />} />
+          <Route path="/home-user" element={<HomeUser />} />
         ) : (
           <Route
-            path="/home"
+            path="/home-user"
             element={
               <div className="bg-red-500 text-white p-4 text-center font-bold">
                 Not Authorized
