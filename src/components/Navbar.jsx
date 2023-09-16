@@ -1,14 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <nav className="bg-purple-700 text-white p-4 shadow-lg">
       <div className="container mx-auto flex items-center justify-between">
-        <div className="text-xl font-bold text-pink-400">ONLAWTHINK!</div>
+        <Link to="/">
+          <div className="text-xl font-bold text-pink-400">ONLAWTHINK!</div>
+        </Link>
         <div className="flex space-x-4">
-          <a href="#" className="hover:text-pink-400 transition duration-300">
+          <Link to="/" className="hover:text-pink-400 transition duration-300">
             Home
-          </a>
+          </Link>
           <a href="#" className="hover:text-pink-400 transition duration-300">
             Contact
           </a>
