@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 
-function Login({ onLoginSuccess }) {
+function Login({
+  onUserLoginSuccess,
+  onLawyerLoginSuccess,
+  onJudgeLoginSuccess,
+}) {
   const [formData, setFormData] = useState({
     emailAddress: "",
     password: "",
     accountType: "user",
   });
 
-  const [alertMessage, setAlertMessage] = useState(""); 
+  const [alertMessage, setAlertMessage] = useState("");
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -33,8 +37,17 @@ function Login({ onLoginSuccess }) {
         const data = await response.json();
         if (data.message === "Login successful") {
           setAlertMessage("Login successful");
-          // Call the onLoginSuccess function to update the login status
-          onLoginSuccess();
+          // Check the accountType in the response data
+          const { accountType } = data.user;
+
+          // Call the respective login success function based on the accountType
+          if (accountType === "user") {
+            onUserLoginSuccess();
+          } else if (accountType === "lawyer") {
+            onLawyerLoginSuccess();
+          } else if (accountType === "judge") {
+            onJudgeLoginSuccess();
+          }
         } else {
           setAlertMessage("Login failed"); // Handle other responses if needed
         }
@@ -52,10 +65,19 @@ function Login({ onLoginSuccess }) {
       <div className="bg-white p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl font-semibold text-darkpurple mb-6">Login</h2>
         {alertMessage && (
-          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-md mb-4">
+          <div
+            className={`${
+              alertMessage === "Registration successful"
+                ? "bg-green-100 border border-green-400 text-green-700"
+                : alertMessage === "Login failed"
+                ? "bg-red-100 border border-red-400 text-red-700"
+                : ""
+            } px-4 py-3 rounded-md mb-4`}
+          >
             {alertMessage}
           </div>
         )}
+
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label

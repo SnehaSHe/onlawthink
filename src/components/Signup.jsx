@@ -11,7 +11,7 @@ const SignUp = () => {
     phoneNo: "",
   });
 
-  const [successMessage, setSuccessMessage] = useState(""); // State for success alert
+  const [alertMessage, setAlertMessage] = useState(""); // State for success alert
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -33,34 +33,39 @@ const SignUp = () => {
         body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        // Sign-up successful, display a success message
-        setSuccessMessage("Sign-up successful!");
-        // You can also reset the form if needed: setFormData({ ...formData, initialState });
-      } else {
-        console.error("Sign-up failed.");
-        setSuccessMessage(""); // Clear any previous success message
-      }
+     if (response.ok) {
+       const data = await response.json();
+       setAlertMessage(data.message);
+     } else {
+       console.error("Sign-up request failed.");
+       setAlertMessage("User Already Registered"); // Clear any previous success message
+     }
     } catch (error) {
       console.error("Error:", error);
-      setSuccessMessage(""); // Clear any previous success message
+      setAlertMessage("Signup Failed"); // Clear any previous success message
     }
   };
 
   return (
     <div className="min-h-screen bg-pink-100 pt-10">
       <div className="flex justify-center items-center">
-        <div className="flex justify-center items-center"></div>
         <div className="bg-white w-full max-w-md rounded-lg shadow-lg p-8 space-y-6">
-          {successMessage && (
-            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-md mb-4">
-              {successMessage}
+          {alertMessage && (
+            <div
+              className={`${
+                alertMessage === "Registration successful"
+                  ? "bg-green-100 border border-green-400 text-green-700"
+                  : "bg-red-100 border border-red-400 text-red-700"
+              } px-4 py-3 rounded-md mb-4`}
+            >
+              {alertMessage}
             </div>
           )}
+
           <div className="text-2xl font-bold text-purple-800 mb-6 flex items-center">
             Sign Up
           </div>
-          
+
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-2 gap-4">
               <div className="col-span-1">
@@ -102,13 +107,13 @@ const SignUp = () => {
             </div>
             <div>
               <label
-                htmlFor="email"
+                htmlFor="emailAddress"
                 className="block text-gray-700 font-bold mb-2"
               >
                 Email Address
               </label>
               <input
-                type="emailAddress"
+                type="email"
                 id="emailAddress"
                 name="emailAddress"
                 className="w-full border rounded-md px-3 py-2 focus:outline-none focus:border-purple-500"
@@ -152,12 +157,12 @@ const SignUp = () => {
               >
                 <option value="user">USER</option>
                 <option value="lawyer">LAWYER</option>
-                <option value="lawyer">JUDGE</option>
+                <option value="judge">JUDGE</option>
               </select>
             </div>
             <div>
               <label
-                htmlFor="phoneNumber"
+                htmlFor="phoneNo"
                 className="block text-gray-700 font-bold mb-2"
               >
                 Phone Number
