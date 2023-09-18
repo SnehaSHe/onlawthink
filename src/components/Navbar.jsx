@@ -1,17 +1,23 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-const Navbar = ({ authorizedRole }) => {
-  // Initialize isLoggedIn state with true or false based on your initial requirement
+const Navbar = ({
+  isUserAuthenticated,
+  isLawyerAuthenticated,
+  isJudgeAuthenticated,
+  setIsUserAuthenticated,
+  setIsLawyerAuthenticated,
+  setIsJudgeAuthenticated,
+}) => {
+  const navigate = useNavigate();
 
-  // Function to set isLoggedIn to false when Home link is clicked
-  const handleHomeClick = () => {
-    setAuthorizedRole(false);
-  };
-
-  // Function to set isLoggedIn to false when Log Out link is clicked
-  const handleLogoutClick = () => {
-    setAuthorizedRole(false);
+  // Function to handle logout
+  const handleLogout = () => {
+    // Clear authentication states and navigate to "/"
+    setIsUserAuthenticated(false);
+    setIsLawyerAuthenticated(false);
+    setIsJudgeAuthenticated(false);
+    navigate("/");
   };
 
   return (
@@ -20,50 +26,29 @@ const Navbar = ({ authorizedRole }) => {
         <Link to="/">
           <div className="text-4xl font-bold text-pink-400">ONLAWTHINK!</div>
         </Link>
+        <Link to="/">
+          <div className="text-4xl font-bold text-pink-400">Home</div>
+        </Link>
+        <Link to="/">
+          <div className="text-4xl font-bold text-pink-400">Contact</div>
+        </Link>
+        <Link to="/">
+          <div className="text-4xl font-bold text-pink-400">Helpline</div>
+        </Link>
         <div className="flex space-x-4">
-          {/* Add an onClick handler to the Home link */}
-          <Link
-            to="/"
-            className="hover:text-pink-400 transition duration-300"
-            onClick={handleHomeClick}
-          >
-            Home
-          </Link>
-          <a href="#" className="hover:text-pink-400 transition duration-300">
-            Contact
-          </a>
-          <a href="#" className="hover:text-pink-400 transition duration-300">
-            Locate
-          </a>
-          <a href="#" className="hover:text-pink-400 transition duration-300">
-            About
-          </a>
-          <a href="#" className="hover:text-pink-400 transition duration-300">
-            Help
-          </a>
-          {authorizedRole ? (
-            <Link
-              to="/"
+          {/* ... (other links) ... */}
+          {isUserAuthenticated ||
+          isLawyerAuthenticated ||
+          isJudgeAuthenticated ? (
+            <button
               className="hover:text-pink-400 transition duration-300"
-              onClick={handleLogoutClick}
+              onClick={handleLogout}
             >
               Log Out
-            </Link>
+            </button>
           ) : null}
         </div>
-        {authorizedRole ? (
-          <div className="text-white text-center">
-            {authorizedRole === "lawyer" ? (
-              <div className="text-2xl">LAWYER PORTAL</div>
-            ) : authorizedRole === "user" ? (
-              <div className="text-2xl">USER PORTAL</div>
-            ) : authorizedRole === "judge" ? (
-              <div className="text-2xl">JUDGE PORTAL</div>
-            ) : (
-              <div>{authorizedRole} Portal</div>
-            )}
-          </div>
-        ) : null}
+       
       </div>
     </nav>
   );

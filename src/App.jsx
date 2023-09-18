@@ -1,83 +1,65 @@
-import ReactDOM from "react-dom/client";
-import { useState } from "react";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
-import Signup from "./components/Signup";
-import Navbar from "./components/Navbar";
-import Login from "./components/Login";
+import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import LandingPage from "./components/LandingPage";
 import HomeUser from "./components/HomeUser";
+import UserLogin from "./components/UserLogin";
+import UserSignUp from "./components/UserSignUp";
 import HomeLawyer from "./components/HomeLawyer";
+import LawyerLogin from "./components/LawyerLogin";
 import HomeJudge from "./components/HomeJudge";
+import LawyerSignUp from "./components/LawyerSignUp";
+import Navbar from "./components/Navbar";
 import "./index.css";
 
 export default function App() {
-  const [authorizedRole, setAuthorizedRole] = useState(null);
-  const navigate = useNavigate();
-
-  const handleUserLoginSuccess = () => {
-    setAuthorizedRole("user");
-    navigate("/home-user");
-  };
-  const handleLawyerLoginSuccess = () => {
-    setAuthorizedRole("lawyer");
-    navigate("/home-lawyer");
-  };
-  const handleJudgeLoginSuccess = () => {
-    setAuthorizedRole("judge");
-    navigate("/home-judge");
-  };
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+  const [isLawyerAuthenticated, setIsLawyerAuthenticated] = useState(false);
+  const [isJudgeAuthenticated, setIsJudgeAuthenticated] = useState(false);
 
   return (
-    <>
-      <Navbar authorizedRole={authorizedRole}></Navbar>
+    <div>
+      <Navbar
+        isUserAuthenticated={isUserAuthenticated}
+        isLawyerAuthenticated={isLawyerAuthenticated}
+        isJudgeAuthenticated={isJudgeAuthenticated}
+        setIsUserAuthenticated={setIsUserAuthenticated}
+        setIsLawyerAuthenticated={setIsLawyerAuthenticated}
+        setIsJudgeAuthenticated={setIsJudgeAuthenticated}
+      />
       <Routes>
-        <Route path="/" element={<Signup />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/user" element={<UserSignUp />} />
+        <Route path="/lawyer" element={<LawyerSignUp />} />
+        <Route path="/judge" element={<LawyerSignUp />} />
         <Route
-          path="/login"
+          path="/user/login"
           element={
-            <Login
-              onUserLoginSuccess={handleUserLoginSuccess}
-              onLawyerLoginSuccess={handleLawyerLoginSuccess}
-              onJudgeLoginSuccess={handleJudgeLoginSuccess}
+            <UserLogin
+              isUserAuthenticated={isUserAuthenticated}
+              setIsUserAuthenticated={setIsUserAuthenticated}
             />
           }
         />
-        {authorizedRole === "user" ? (
-          <Route path="/home-user" element={<HomeUser />} />
-        ) : (
-          <Route
-            path="/home-user"
-            element={
-              <div className="bg-red-500 text-white p-4 text-center font-bold">
-                Not Authorized
-              </div>
-            }
-          />
-        )}
-        {authorizedRole === "lawyer" ? (
-          <Route path="/home-lawyer" element={<HomeLawyer />} />
-        ) : (
-          <Route
-            path="/home-lawyer"
-            element={
-              <div className="bg-red-500 text-white p-4 text-center font-bold">
-                Not Authorized
-              </div>
-            }
-          />
-        )}
-        {authorizedRole === "judge" ? (
-          <Route path="/home-judge" element={<HomeJudge />} />
-        ) : (
-          <Route
-            path="/home-judge"
-            element={
-              <div className="bg-red-500 text-white p-4 text-center font-bold">
-                Not Authorized
-              </div>
-            }
-          />
-        )}
+        <Route
+          path="/home-user"
+          element={<HomeUser isUserAuthenticated={isUserAuthenticated} />}
+        />
+        <Route
+          path="/lawyer/login"
+          element={
+            <LawyerLogin
+              isLawyerAuthenticated={isLawyerAuthenticated}
+              setIsLawyerAuthenticated={setIsLawyerAuthenticated}
+            />
+          }
+        />
+        <Route
+          path="/home-lawyer"
+          element={<HomeLawyer isLawyerAuthenticated={isLawyerAuthenticated} />}
+        />
+
+        <Route path="/judge" element={<HomeJudge />} />
       </Routes>
-    </>
+    </div>
   );
 }
