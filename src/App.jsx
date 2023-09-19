@@ -6,6 +6,7 @@ import UserLogin from "./components/User/UserLogin";
 import UserSignUp from "./components/User/UserSignUp";
 import HomeLawyer from "./components/Lawyer/HomeLawyer";
 import LawyerLogin from "./components/Lawyer/LawyerLogin";
+import LawyerInfo from "./components/Lawyer/LawyerInfo";
 import HomeJudge from "./components/Judge/HomeJudge";
 import LawyerSignUp from "./components/Lawyer/LawyerSignUp";
 import LawyerByLocation from "./components/User/LawyerByLocation";
@@ -87,6 +88,10 @@ export default function App() {
         <Route
           path="/home-lawyer"
           element={<HomeLawyer isLawyerAuthenticated={isLawyerAuthenticated} />}
+        />
+        <Route
+          path="/lawyer-info"
+          element={<LawyerInfo isLawyerAuthenticated={isLawyerAuthenticated} />}
         />
 
         <Route path="/judge" element={<HomeJudge />} />

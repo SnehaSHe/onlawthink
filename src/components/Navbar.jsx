@@ -20,21 +20,27 @@ const Navbar = ({
     navigate("/");
   };
 
+  let homeLink;
+
+  if (isUserAuthenticated) {
+    homeLink = "/home-user";
+  } else if (isLawyerAuthenticated) {
+    homeLink = "/home-lawyer";
+  } else if (isJudgeAuthenticated) {
+    homeLink = "/home-judge";
+  } else {
+    homeLink = "/";
+  }
+
   return (
     <nav className="bg-purple-700 text-white p-4 shadow-lg">
       <div className="container mx-auto flex items-center justify-between">
         <Link to="/">
           <div className="text-4xl font-bold text-pink-400">ONLAWTHINK!</div>
         </Link>
-        {isUserAuthenticated ? (
-          <Link to="/home-user">
-            <div className="text-4xl font-bold text-pink-400">Home</div>
-          </Link>
-        ) : (
-          <Link to="/">
-            <div className="text-4xl font-bold text-pink-400">Home</div>
-          </Link>
-        )}
+        <Link to={homeLink}>
+          <div className="text-4xl font-bold text-pink-400">Home</div>
+        </Link>
         <Link to="/">
           <div className="text-4xl font-bold text-pink-400">Contact</div>
         </Link>
