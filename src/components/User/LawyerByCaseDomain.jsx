@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate,Link } from "react-router-dom";
 
 const LawyerByCaseDomain = ({ isUserAuthenticated }) => {
     if (!isUserAuthenticated) {
@@ -81,6 +81,18 @@ const LawyerByCaseDomain = ({ isUserAuthenticated }) => {
           </button>
         </div>
       </form>
+      <div className="absolute top-0 right-0 mt-20 mr-8 flex items-center space-x-3">
+        <Link to="/search-lawyer-by-location">
+          <button className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 mr-3">
+            Search Lawyer by Location
+          </button>
+        </Link>
+        <Link to="/all-lawyers">
+          <button className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-purple-600">
+            All lawyers
+          </button>
+        </Link>
+      </div>
 
       {message && <p className="text-green-500 mb-4">{message}</p>}
 

@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import LandingPage from "./components/LandingPage";
-import HomeUser from "./components/HomeUser";
-import UserLogin from "./components/UserLogin";
-import UserSignUp from "./components/UserSignUp";
-import HomeLawyer from "./components/HomeLawyer";
-import LawyerLogin from "./components/LawyerLogin";
-import HomeJudge from "./components/HomeJudge";
-import LawyerSignUp from "./components/LawyerSignUp";
-import LawyerByLocation from "./components/LawyerByLocation";
-import AllLawyers from "./components/AllLawyers";
+import HomeUser from "./components/User/HomeUser";
+import UserLogin from "./components/User/UserLogin";
+import UserSignUp from "./components/User/UserSignUp";
+import HomeLawyer from "./components/Lawyer/HomeLawyer";
+import LawyerLogin from "./components/Lawyer/LawyerLogin";
+import HomeJudge from "./components/Judge/HomeJudge";
+import LawyerSignUp from "./components/Lawyer/LawyerSignUp";
+import LawyerByLocation from "./components/User/LawyerByLocation";
+import AllLawyers from "./components/User/AllLawyers";
 import Navbar from "./components/Navbar";
 import "./index.css";
-import LawyerByCaseDomain from "./components/LawyerByCaseDomain";
+import LawyerByCaseDomain from "./components/User/LawyerByCaseDomain";
 
 export default function App() {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
