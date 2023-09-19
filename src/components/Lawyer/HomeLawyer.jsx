@@ -17,17 +17,17 @@ function HomeLawyer({ isLawyerAuthenticated }) {
       <h1 className="text-4xl font-bold mb-6">Welcome, Lawyer!</h1>
       <div className="space-y-4">
         <Link to="/lawyer-info">
-          <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">
+          <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mr-3">
             My Info
           </button>
         </Link>
         <Link to="/lawyer-requests">
-          <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md">
+          <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md mr-3">
             My Requests
           </button>
         </Link>
         <Link to="/lawyer-accepted-users">
-          <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
+          <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md mr-3">
             Accepted Users
           </button>
         </Link>
