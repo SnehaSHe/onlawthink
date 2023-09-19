@@ -26,9 +26,15 @@ const Navbar = ({
         <Link to="/">
           <div className="text-4xl font-bold text-pink-400">ONLAWTHINK!</div>
         </Link>
-        <Link to="/">
-          <div className="text-4xl font-bold text-pink-400">Home</div>
-        </Link>
+        {isUserAuthenticated ? (
+          <Link to="/home-user">
+            <div className="text-4xl font-bold text-pink-400">Home</div>
+          </Link>
+        ) : (
+          <Link to="/">
+            <div className="text-4xl font-bold text-pink-400">Home</div>
+          </Link>
+        )}
         <Link to="/">
           <div className="text-4xl font-bold text-pink-400">Contact</div>
         </Link>
@@ -48,7 +54,6 @@ const Navbar = ({
             </button>
           ) : null}
         </div>
-       
       </div>
     </nav>
   );

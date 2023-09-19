@@ -8,8 +8,11 @@ import HomeLawyer from "./components/HomeLawyer";
 import LawyerLogin from "./components/LawyerLogin";
 import HomeJudge from "./components/HomeJudge";
 import LawyerSignUp from "./components/LawyerSignUp";
+import LawyerByLocation from "./components/LawyerByLocation";
+import AllLawyers from "./components/AllLawyers";
 import Navbar from "./components/Navbar";
 import "./index.css";
+import LawyerByCaseDomain from "./components/LawyerByCaseDomain";
 
 export default function App() {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
@@ -32,6 +35,18 @@ export default function App() {
         <Route path="/lawyer" element={<LawyerSignUp />} />
         <Route path="/judge" element={<LawyerSignUp />} />
         <Route
+          path="/search-lawyer-by-location"
+          element={
+            <LawyerByLocation isUserAuthenticated={isUserAuthenticated} />
+          }
+        />
+        <Route
+          path="/search-lawyer-by-case"
+          element={
+            <LawyerByCaseDomain isUserAuthenticated={isUserAuthenticated} />
+          }
+        />
+        <Route
           path="/user/login"
           element={
             <UserLogin
@@ -43,6 +58,10 @@ export default function App() {
         <Route
           path="/home-user"
           element={<HomeUser isUserAuthenticated={isUserAuthenticated} />}
+        />
+        <Route
+          path="/all-lawyers"
+          element={<AllLawyers isUserAuthenticated={isUserAuthenticated} />}
         />
         <Route
           path="/lawyer/login"
