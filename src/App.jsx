@@ -30,7 +30,19 @@ export default function App() {
         setIsJudgeAuthenticated={setIsJudgeAuthenticated}
       />
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route
+          path="/"
+          element={
+            <LandingPage
+              isUserAuthenticated={isUserAuthenticated}
+              isLawyerAuthenticated={isLawyerAuthenticated}
+              isJudgeAuthenticated={isJudgeAuthenticated}
+              setIsUserAuthenticated={setIsUserAuthenticated}
+              setIsLawyerAuthenticated={setIsLawyerAuthenticated}
+              setIsJudgeAuthenticated={setIsJudgeAuthenticated}
+            />
+          }
+        />
         <Route path="/user" element={<UserSignUp />} />
         <Route path="/lawyer" element={<LawyerSignUp />} />
         <Route path="/judge" element={<LawyerSignUp />} />

@@ -1,7 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function LandingPage() {
+export default function LandingPage({
+  isUserAuthenticated,
+  isLawyerAuthenticated,
+  isJudgeAuthenticated,
+  setIsUserAuthenticated,
+  setIsLawyerAuthenticated,
+  setIsJudgeAuthenticated,
+}) {
+  // Set all authentication states to false when the component loads
+  React.useEffect(() => {
+    setIsUserAuthenticated(false);
+    setIsLawyerAuthenticated(false);
+    setIsJudgeAuthenticated(false);
+  }, []); // The empty dependency array ensures this effect runs only once on component mount
+
   return (
     <div className="bg-pink-200 h-screen flex justify-center items-center">
       <div className="bg-white p-8 rounded shadow-md w-80">
