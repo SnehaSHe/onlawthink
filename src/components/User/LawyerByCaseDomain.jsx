@@ -1,15 +1,37 @@
-import React, { useState } from "react";
-import { Navigate,Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Navigate, Link } from "react-router-dom";
 
 const LawyerByCaseDomain = ({ isUserAuthenticated }) => {
-    if (!isUserAuthenticated) {
-      return <Navigate to="/" />;
-    }
+  if (!isUserAuthenticated) {
+    return <Navigate to="/" />;
+  }
+
   const [caseDomain, setCaseDomain] = useState("");
   const [lawyers, setLawyers] = useState([]);
   const [selectedLawyer, setSelectedLawyer] = useState(null);
   const [selectedContactInfo, setSelectedContactInfo] = useState(null);
   const [message, setMessage] = useState("");
+  const [caseDomainsList, setCaseDomainsList] = useState([]);
+  const [selectedCaseDomain, setSelectedCaseDomain] = useState(""); // New state for selected case domain
+
+  useEffect(() => {
+    // Fetch the list of case domains from the API
+    const fetchCaseDomains = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/user/getCaseDomain"
+        );
+        const data = await response.json();
+        if (response.ok) {
+          setCaseDomainsList(data.caseDomains);
+        }
+      } catch (error) {
+        console.error("Error fetching case domains: ", error);
+      }
+    };
+
+    fetchCaseDomains();
+  }, []); // Run this effect only once on component mount
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,7 +45,7 @@ const LawyerByCaseDomain = ({ isUserAuthenticated }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ caseDomain }),
+          body: JSON.stringify({ caseDomain: selectedCaseDomain }), // Use the selectedCaseDomain
         }
       );
 
@@ -40,6 +62,7 @@ const LawyerByCaseDomain = ({ isUserAuthenticated }) => {
       console.error("Error fetching data: ", error);
     }
   };
+
   const openLawyerInfo = (lawyer) => {
     setSelectedLawyer(lawyer);
     setSelectedContactInfo(null);
@@ -62,17 +85,22 @@ const LawyerByCaseDomain = ({ isUserAuthenticated }) => {
       </h1>
       <form onSubmit={handleSubmit} className="mb-4">
         <div className="flex items-center space-x-4">
-          <label htmlFor="location" className="text-lg">
-            Enter Case Domain:
+          <label htmlFor="caseDomain" className="text-lg">
+            Select Case Domain:
           </label>
-          <input
-            type="text"
+          <select
             id="caseDomain"
             className="px-3 py-2 border border-purple-800 rounded-lg focus:outline-none bg-purple-100 text-purple-800"
-            placeholder="Enter Domain of case here"
-            value={caseDomain}
-            onChange={(e) => setCaseDomain(e.target.value)}
-          />
+            value={selectedCaseDomain}
+            onChange={(e) => setSelectedCaseDomain(e.target.value)}
+          >
+            <option value="">Select a case domain</option>
+            {caseDomainsList.map((domain) => (
+              <option key={domain} value={domain}>
+                {domain}
+              </option>
+            ))}
+          </select>
           <button
             type="submit"
             className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"

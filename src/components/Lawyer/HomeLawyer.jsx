@@ -10,16 +10,12 @@ function HomeLawyer({ isLawyerAuthenticated }) {
       navigate("/");
     }
   }, [isLawyerAuthenticated, navigate]);
-
-  if (!isLawyerAuthenticated) {
-    // You can return null or a loading indicator here, if needed
-    return null;
-  }
-
+  
+  const lawyerID = localStorage.getItem("lawyerId");
   return (
     <>
-      <p>Hi</p>
-      {/* Add the rest of your content here */}
+      <p>Hi Lawyer {lawyerID}</p>
+      
     </>
   );
 }

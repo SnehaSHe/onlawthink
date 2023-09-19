@@ -1,14 +1,37 @@
-import React, { useState } from "react";
-import { Navigate,Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Navigate, Link } from "react-router-dom";
 
-const LawyerByLocation = ({isUserAuthenticated}) => {
-   if (!isUserAuthenticated) {
-    return <Navigate to="/" />;}
+const LawyerByLocation = ({ isUserAuthenticated }) => {
+  if (!isUserAuthenticated) {
+    return <Navigate to="/" />;
+  }
+
   const [location, setLocation] = useState("");
   const [lawyers, setLawyers] = useState([]);
   const [selectedLawyer, setSelectedLawyer] = useState(null);
   const [selectedContactInfo, setSelectedContactInfo] = useState(null);
   const [message, setMessage] = useState("");
+  const [locationsList, setLocationsList] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState(""); // New state for selected location
+
+  useEffect(() => {
+    // Fetch the list of locations from the API
+    const fetchLocations = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/user/getLocation"
+        );
+        const data = await response.json();
+        if (response.ok) {
+          setLocationsList(data.locations);
+        }
+      } catch (error) {
+        console.error("Error fetching locations: ", error);
+      }
+    };
+
+    fetchLocations();
+  }, []); // Run this effect only once on component mount
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +45,7 @@ const LawyerByLocation = ({isUserAuthenticated}) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ location }),
+          body: JSON.stringify({ location: selectedLocation }), // Use the selectedLocation
         }
       );
 
@@ -39,58 +62,65 @@ const LawyerByLocation = ({isUserAuthenticated}) => {
       console.error("Error fetching data: ", error);
     }
   };
-   const openLawyerInfo = (lawyer) => {
-    setSelectedLawyer(lawyer);
-    setSelectedContactInfo(null);
-  };
+ const openLawyerInfo = (lawyer) => {
+   setSelectedLawyer(lawyer);
+   setSelectedContactInfo(null);
+ };
 
-  const openContactInfo = (lawyer) => {
-    setSelectedContactInfo(lawyer);
-    setSelectedLawyer(null);
-  };
+ const openContactInfo = (lawyer) => {
+   setSelectedContactInfo(lawyer);
+   setSelectedLawyer(null);
+ };
 
-  const closeInfo = () => {
-    setSelectedLawyer(null);
-    setSelectedContactInfo(null);
-  };
-
+ const closeInfo = () => {
+   setSelectedLawyer(null);
+   setSelectedContactInfo(null);
+ };
   return (
-   <div className="container mx-auto p-4">
-  <h1 className="text-4xl text-purple-800 font-bold mb-4">
-    Lawyers by Location
-  </h1>
-  <form onSubmit={handleSubmit} className="mb-4 flex items-center flex-wrap">
-    <label htmlFor="location" className="text-lg">
-      Enter Location:
-    </label>
-    <input
-      type="text"
-      id="location"
-      className="px-3 py-2 border border-purple-800 rounded-lg focus:outline-none bg-purple-100 text-purple-800"
-      placeholder="Enter city here"
-      value={location}
-      onChange={(e) => setLocation(e.target.value)}
-    />
-    <button
-      type="submit"
-      className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 mt-2 md:mt-0"
-    >
-      Search
-    </button>
-  </form>
-  <div className="absolute top-0 right-0 mt-20 mr-8 flex items-center space-x-3">
-    <Link to="/all-lawyers">
-      <button className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">
-        Search from all Lawyers
-      </button>
-    </Link>
-    <Link to="/search-lawyer-by-case">
-      <button className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-purple-600">
-        Lawyer By Case Domain
-      </button>
-    </Link>
-  </div>
+    <div className="container mx-auto p-4">
+      <h1 className="text-4xl text-purple-800 font-bold mb-4">
+        Lawyers by Location
+      </h1>
+      <form
+        onSubmit={handleSubmit}
+        className="mb-4 flex items-center flex-wrap"
+      >
+        <label htmlFor="location" className="text-lg">
+          Select Location:
+        </label>
+        <select
+          id="location"
+          className="px-3 py-2 border border-purple-800 rounded-lg focus:outline-none bg-purple-100 text-purple-800"
+          value={selectedLocation}
+          onChange={(e) => setSelectedLocation(e.target.value)}
+        >
+          <option value="">Select a location</option>
+          {locationsList.map((loc) => (
+            <option key={loc} value={loc}>
+              {loc}
+            </option>
+          ))}
+        </select>
+        <button
+          type="submit"
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 mt-2 md:mt-0"
+        >
+          Search
+        </button>
+      </form>
 
+      <div className="absolute top-0 right-0 mt-20 mr-8 flex items-center space-x-3">
+        <Link to="/all-lawyers">
+          <button className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">
+            Search from all Lawyers
+          </button>
+        </Link>
+        <Link to="/search-lawyer-by-case">
+          <button className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-purple-600">
+            Lawyer By Case Domain
+          </button>
+        </Link>
+      </div>
 
       {message && <p className="text-green-500 mb-4">{message}</p>}
 

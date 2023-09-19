@@ -30,6 +30,7 @@ export default function LawyerLogin({
         // If the response status is OK (2xx), it's a successful login
         setAlertType("success");
         setAlertMessage("Login successful");
+        localStorage.setItem("lawyerId", data.user._id);
 
         // Update the authentication state to true
         setIsLawyerAuthenticated(true);
