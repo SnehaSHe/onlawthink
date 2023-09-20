@@ -22,7 +22,6 @@ function AllLawyers({ isUserAuthenticated }) {
       .catch((error) => {
         console.error("Error fetching lawyers:", error);
       });
-      
   }, []);
 
   const openLawyerInfo = (lawyer) => {
@@ -55,13 +54,28 @@ function AllLawyers({ isUserAuthenticated }) {
       },
       body: JSON.stringify(requestData),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        // Update the message in the state
-        setMessage(data.message);
+      .then((response) => {
+        return response
+          .json()
+          .then((data) => {
+            if (response.status===200) {
+              // Show an alert for successful responses (status code 200)
+              alert(data.message);
+            } else {
+              // Show an alert for client errors (status code 400)
+              alert(` ${data.message}`);
+            }
+            return data;
+          })
+          .catch((error) => {
+            console.error("Error parsing response:", error);
+            throw error;
+          });
       })
       .catch((error) => {
         console.error("Error sending request:", error);
+        // Optionally, you can set an error message if the request fails
+        setMessage("Request failed");
       });
   };
 
