@@ -50,9 +50,9 @@ const LawyerSignUp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-pink-100 pt-10">
+    <div className="min-h-screen pt-10">
       <div className="flex justify-center items-center">
-        <div className="bg-white w-full max-w-md rounded-lg shadow-lg p-8 space-y-6">
+      <div className="bg-white w-full max-w-md rounded-lg border border-purple shadow-md shadow-lg p-8 space-y-6">
           {alertMessage && (
             <div
               className={`${
@@ -65,7 +65,7 @@ const LawyerSignUp = () => {
             </div>
           )}
 
-          <div className="text-2xl font-bold text-purple-800 mb-6 flex items-center">
+          <div className="text-2xl font-serif font-bold text-custom-text mb-6 flex items-center">
             Sign Up
           </div>
 
@@ -215,15 +215,15 @@ const LawyerSignUp = () => {
             <div>
               <button
                 type="submit"
-                className="w-full bg-purple-800 text-white font-bold py-2 rounded-md hover:bg-purple-900 mt-5"
+                className="w-full bg-purple-900 text-white font-bold py-2 rounded-md hover:bg-purple-900 mt-5"
               >
                 Create Account
               </button>
             </div>
           </form>
           <Link to="login">
-            <button className="w-full mt-4 bg-purple-800 text-white font-bold py-2 rounded-md hover:bg-purple-700">
-              Login (If you already have an account)
+            <button className="w-full mt-4 bg-purple-900 text-white font-bold py-2 rounded-md hover:bg-purple-700">
+              Login 
             </button>
           </Link>
         </div>

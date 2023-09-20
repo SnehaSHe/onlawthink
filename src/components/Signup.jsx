@@ -47,7 +47,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-pink-100 pt-10">
+    <div className="min-h-screen bg-green-100 pt-10">
       <div className="flex justify-center items-center">
         <div className="bg-white w-full max-w-md rounded-lg shadow-lg p-8 space-y-6">
           {alertMessage && (

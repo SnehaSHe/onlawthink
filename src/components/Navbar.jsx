@@ -33,35 +33,32 @@ const Navbar = ({
   }
 
   return (
-    <nav className="bg-purple-700 text-white p-4 shadow-lg">
-      <div className="container mx-auto flex items-center justify-between">
-        <Link to="/">
-          <div className="text-4xl font-bold text-pink-400">ONLAWTHINK!</div>
-        </Link>
-        <Link to={homeLink}>
-          <div className="text-4xl font-bold text-pink-400">Home</div>
-        </Link>
-        <Link to="/">
-          <div className="text-4xl font-bold text-pink-400">Contact</div>
-        </Link>
-        <Link to="/">
-          <div className="text-4xl font-bold text-pink-400">Helpline</div>
-        </Link>
-        <div className="flex space-x-4">
-          {/* ... (other links) ... */}
-          {isUserAuthenticated ||
-          isLawyerAuthenticated ||
-          isJudgeAuthenticated ? (
-            <button
-              className="hover:text-pink-400 transition duration-300"
-              onClick={handleLogout}
-            >
-              Log Out
-            </button>
-          ) : null}
-        </div>
+    <nav className="bg-custom-purple text-black p-4 shadow-lg">
+  <div className="container mx-auto flex items-center justify-between">
+    <Link to="/">
+      <div className="text-2xl font-bold text-black-200">ONLAWTHINK!</div>
+    </Link>
+    <div className="flex items-center space-x-4 ml-6">
+      <Link to={homeLink} className="text-1xl font-serif text-custom-text pr-4">Home</Link>
+      <Link to="/" className="text-1xl font-serif text-custom-text pr-4">Contact</Link>
+      <Link to="/" className="text-1xl font-serif text-custom-text pr-4">Helpline</Link>
+      <div className="space-x-4">
+        {/* ... (other links) ... */}
+        {isUserAuthenticated ||
+        isLawyerAuthenticated ||
+        isJudgeAuthenticated ? (
+          <button
+            className="hover:text-purple-400 transition duration-300"
+            onClick={handleLogout}
+          >
+            Log Out
+          </button>
+        ) : null}
       </div>
-    </nav>
+    </div>
+  </div>
+</nav>
+
   );
 };
 

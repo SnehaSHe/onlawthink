@@ -54,7 +54,7 @@ export default function LawyerLogin({
   };
 
   return (
-    <div className="bg-gray-100 h-screen flex flex-col justify-center items-center">
+    <div className=" h-screen flex flex-col justify-center items-center">
       {alertMessage && (
         <div
           className={`${
@@ -64,8 +64,8 @@ export default function LawyerLogin({
           {alertMessage}
         </div>
       )}
-      <div className="bg-white p-8 rounded shadow-md w-80">
-        <h1 className="text-3xl font-bold text-center mb-4">Login</h1>
+      <div className="bg-white p-12 rounded border border-purple shadow-md shadow-lg p-12 space-y-6">
+        <h1 className="text-3xl font-serif font-bold text-center text-custom-text mb-4">Login</h1>
         <div className="mb-4">
           <label htmlFor="email" className="block text-sm font-semibold">
             Email Address:
@@ -93,7 +93,7 @@ export default function LawyerLogin({
           />
         </div>
         <button
-          className="block w-full bg-blue-500 text-white rounded-md py-2 hover:bg-blue-600 transition duration-300"
+          className="block w-full bg-purple-900 text-white rounded-md py-2 hover:bg-blue-600 transition duration-300"
           onClick={handleLogin}
         >
           Login
