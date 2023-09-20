@@ -30,6 +30,7 @@ export default function UserLogin({
         // If the response status is OK (2xx), it's a successful login
         setAlertType("success");
         setAlertMessage("Login successful");
+        localStorage.setItem("userId", data.user._id);
 
         // Update the authentication state to true
         setIsUserAuthenticated(true);
@@ -53,7 +54,7 @@ export default function UserLogin({
   };
 
   return (
-    <div className="bg-gray-100 h-screen flex flex-col justify-center items-center">
+    <div className=" h-screen flex flex-col justify-center items-center">
       {alertMessage && (
         <div
           className={`${
@@ -64,7 +65,9 @@ export default function UserLogin({
         </div>
       )}
       <div className="bg-white p-8 rounded shadow-md w-80">
-        <h1 className="text-3xl font-bold text-center mb-4">Login</h1>
+        <h1 className="text-3xl font-serif font-bold text-custom-text text-center mb-4">
+          Login
+        </h1>
         <div className="mb-4">
           <label htmlFor="email" className="block text-sm font-semibold">
             Email Address:
@@ -92,7 +95,7 @@ export default function UserLogin({
           />
         </div>
         <button
-          className="block w-full bg-blue-500 text-white rounded-md py-2 hover:bg-blue-600 transition duration-300"
+          className="block w-full bg-purple-900 text-white rounded-md py-2 hover:bg-blue-600 transition duration-300"
           onClick={handleLogin}
         >
           Login

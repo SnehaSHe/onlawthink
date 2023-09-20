@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function LawyerLogin({
-  setIsLawyerAuthenticated // You can use this function to update the authentication state
+  setIsLawyerAuthenticated, // You can use this function to update the authentication state
 }) {
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +30,7 @@ export default function LawyerLogin({
         // If the response status is OK (2xx), it's a successful login
         setAlertType("success");
         setAlertMessage("Login successful");
-        localStorage.setItem("lawyerId", data.user._id);
+        localStorage.setItem("lawyerId", data.lawyer._id);
 
         // Update the authentication state to true
         setIsLawyerAuthenticated(true);
@@ -54,7 +54,7 @@ export default function LawyerLogin({
   };
 
   return (
-    <div className="bg-gray-100 h-screen flex flex-col justify-center items-center">
+    <div className=" h-screen flex flex-col justify-center items-center">
       {alertMessage && (
         <div
           className={`${
@@ -64,8 +64,10 @@ export default function LawyerLogin({
           {alertMessage}
         </div>
       )}
-      <div className="bg-white p-8 rounded shadow-md w-80">
-        <h1 className="text-3xl font-bold text-center mb-4">Login</h1>
+      <div className="bg-white p-12 rounded border border-purple shadow-md shadow-lg p-12 space-y-6">
+        <h1 className="text-3xl font-serif font-bold text-center text-custom-text mb-4">
+          Login
+        </h1>
         <div className="mb-4">
           <label htmlFor="email" className="block text-sm font-semibold">
             Email Address:
@@ -93,7 +95,7 @@ export default function LawyerLogin({
           />
         </div>
         <button
-          className="block w-full bg-blue-500 text-white rounded-md py-2 hover:bg-blue-600 transition duration-300"
+          className="block w-full bg-purple-900 text-white rounded-md py-2 hover:bg-blue-600 transition duration-300"
           onClick={handleLogin}
         >
           Login

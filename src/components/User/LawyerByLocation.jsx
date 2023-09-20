@@ -62,20 +62,20 @@ const LawyerByLocation = ({ isUserAuthenticated }) => {
       console.error("Error fetching data: ", error);
     }
   };
- const openLawyerInfo = (lawyer) => {
-   setSelectedLawyer(lawyer);
-   setSelectedContactInfo(null);
- };
+  const openLawyerInfo = (lawyer) => {
+    setSelectedLawyer(lawyer);
+    setSelectedContactInfo(null);
+  };
 
- const openContactInfo = (lawyer) => {
-   setSelectedContactInfo(lawyer);
-   setSelectedLawyer(null);
- };
+  const openContactInfo = (lawyer) => {
+    setSelectedContactInfo(lawyer);
+    setSelectedLawyer(null);
+  };
 
- const closeInfo = () => {
-   setSelectedLawyer(null);
-   setSelectedContactInfo(null);
- };
+  const closeInfo = () => {
+    setSelectedLawyer(null);
+    setSelectedContactInfo(null);
+  };
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-4xl text-purple-800 font-bold mb-4">

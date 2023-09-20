@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function HomeLawyer({ isLawyerAuthenticated }) {
   const navigate = useNavigate();
@@ -10,7 +10,6 @@ function HomeLawyer({ isLawyerAuthenticated }) {
       navigate("/");
     }
   }, [isLawyerAuthenticated, navigate]);
-
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">

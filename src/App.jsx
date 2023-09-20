@@ -11,6 +11,7 @@ import HomeJudge from "./components/Judge/HomeJudge";
 import LawyerSignUp from "./components/Lawyer/LawyerSignUp";
 import LawyerByLocation from "./components/User/LawyerByLocation";
 import AllLawyers from "./components/User/AllLawyers";
+import LawyerRequest from "./components/Lawyer/LawyerRequest";
 import Navbar from "./components/Navbar";
 import "./index.css";
 import LawyerByCaseDomain from "./components/User/LawyerByCaseDomain";
@@ -46,6 +47,7 @@ export default function App() {
         />
         <Route path="/user" element={<UserSignUp />} />
         <Route path="/lawyer" element={<LawyerSignUp />} />
+        <Route path="/judge" element={<LawyerSignUp />} />
         <Route path="/judge" element={<LawyerSignUp />} />
         <Route
           path="/search-lawyer-by-location"
@@ -92,6 +94,10 @@ export default function App() {
         <Route
           path="/lawyer-info"
           element={<LawyerInfo isLawyerAuthenticated={isLawyerAuthenticated} />}
+        />
+        <Route
+          path="/lawyer-requests"
+          element={<LawyerRequest isLawyerAuthenticated={isLawyerAuthenticated} />}
         />
 
         <Route path="/judge" element={<HomeJudge />} />

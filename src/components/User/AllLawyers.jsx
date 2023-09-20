@@ -6,7 +6,7 @@ function AllLawyers({ isUserAuthenticated }) {
   const [selectedLawyer, setSelectedLawyer] = useState(null);
   const [selectedContactInfo, setSelectedContactInfo] = useState(null);
   const [message, setMessage] = useState("");
-
+  const UserID = localStorage.getItem("userId");
   useEffect(() => {
     // Fetch lawyers data from the API
     fetch("http://localhost:5000/api/lawyer/getAllLawyers")
@@ -14,7 +14,6 @@ function AllLawyers({ isUserAuthenticated }) {
       .then((data) => {
         if (data.message === "Lawyers found") {
           setLawyers(data.lawyers);
-
           setMessage(data.message);
         } else {
           setMessage("Lawyers aren't available");
@@ -23,6 +22,7 @@ function AllLawyers({ isUserAuthenticated }) {
       .catch((error) => {
         console.error("Error fetching lawyers:", error);
       });
+      
   }, []);
 
   const openLawyerInfo = (lawyer) => {
@@ -40,30 +40,40 @@ function AllLawyers({ isUserAuthenticated }) {
     setSelectedContactInfo(null);
   };
 
+  const sendRequest = (lawyer) => {
+    // Prepare the request data
+    const requestData = {
+      userid: UserID, // Replace with the actual user ID
+      lawyerid: lawyer._id,
+    };
+
+    // Send the POST request to the API
+    fetch("http://localhost:5000/api/user/sendRequest", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Update the message in the state
+        setMessage(data.message);
+      })
+      .catch((error) => {
+        console.error("Error sending request:", error);
+      });
+  };
+
   return (
     <div className="relative">
       {isUserAuthenticated ? (
         <>
           <div className="relative">
             <h1 className="text-4xl text-purple-800 font-bold mt-0 mx-auto mb-0">
-              Available Lawyers
+              {`Available Lawyers ${UserID}`}
             </h1>
-            {message === "Lawyers found" ? (
-              <div className="absolute top-0 right-0 mt-8 mr-8 flex items-center">
-                <Link to="/search-lawyer-by-case">
-                  <button className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 mr-3">
-                    Search Lawyer by Case Domain
-                  </button>
-                </Link>
-                <Link to="/search-lawyer-by-location">
-                  <button className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-purple-600">
-                    Search Lawyer by Location
-                  </button>
-                </Link>
-              </div>
-            ) : (
-              <p className="text-red-500 mt-4 text-center">{message}</p>
-            )}
+
             {message === "Lawyers found" && (
               <div className="mt-12 mx-auto max-w-screen-xl">
                 <table className="min-w-full table-auto">
@@ -101,11 +111,11 @@ function AllLawyers({ isUserAuthenticated }) {
                             >
                               Contact Lawyer
                             </button>
-                            <button className="px-2 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600">
-                              Chat Room
-                            </button>
-                            <button className="px-2 py-1 bg-red-500 text-white rounded-lg hover:bg-green-600">
-                              Request Lawyer
+                            <button
+                              className="px-2 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600"
+                              onClick={() => sendRequest(lawyer)}
+                            >
+                              send request
                             </button>
                           </div>
                         </td>
