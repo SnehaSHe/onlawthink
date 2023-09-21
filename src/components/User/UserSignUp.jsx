@@ -49,8 +49,9 @@ const UserSignUp = () => {
   return (
     <div className="min-h-screen bg-white-100 pt-10">
       <div className="flex justify-center items-center">
+
       <div className="bg-white w-full max-w-md rounded-lg border border-purple shadow-md shadow-lg p-8 space-y-6">
-        
+
           {alertMessage && (
             <div
               className={`${
@@ -142,8 +143,7 @@ const UserSignUp = () => {
                 required
               />
             </div>
-            <div>
-            </div>
+            <div></div>
             <div>
               <label
                 htmlFor="phoneNo"

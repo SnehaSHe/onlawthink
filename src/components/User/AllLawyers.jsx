@@ -6,7 +6,7 @@ function AllLawyers({ isUserAuthenticated }) {
   const [selectedLawyer, setSelectedLawyer] = useState(null);
   const [selectedContactInfo, setSelectedContactInfo] = useState(null);
   const [message, setMessage] = useState("");
-
+  const UserID = localStorage.getItem("userId");
   useEffect(() => {
     // Fetch lawyers data from the API
     fetch("http://localhost:5000/api/lawyer/getAllLawyers")
@@ -14,7 +14,6 @@ function AllLawyers({ isUserAuthenticated }) {
       .then((data) => {
         if (data.message === "Lawyers found") {
           setLawyers(data.lawyers);
-
           setMessage(data.message);
         } else {
           setMessage("Lawyers aren't available");
@@ -40,11 +39,52 @@ function AllLawyers({ isUserAuthenticated }) {
     setSelectedContactInfo(null);
   };
 
+  const sendRequest = (lawyer) => {
+    // Prepare the request data
+    const requestData = {
+      userid: UserID, // Replace with the actual user ID
+      lawyerid: lawyer._id,
+    };
+
+    // Send the POST request to the API
+    fetch("http://localhost:5000/api/user/sendRequest", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestData),
+    })
+      .then((response) => {
+        return response
+          .json()
+          .then((data) => {
+            if (response.ok) {
+              // Show an alert for successful responses (status code 200)
+              alert(data.message);
+            } else {
+              // Show an alert for client errors (status code 400)
+              alert(` ${data.message}`);
+            }
+            return data;
+          })
+          .catch((error) => {
+            console.error("Error parsing response:", error);
+            throw error;
+          });
+      })
+      .catch((error) => {
+        console.error("Error sending request:", error);
+        // Optionally, you can set an error message if the request fails
+        setMessage("Request failed");
+      });
+  };
+
   return (
     <div className="relative">
       {isUserAuthenticated ? (
         <>
           <div className="relative">
+
             <h1 className="text-4xl text-custom-text font-bold mt-0 mx-auto mb-0">
               Available Lawyers
             </h1>
@@ -64,6 +104,7 @@ function AllLawyers({ isUserAuthenticated }) {
             ) : (
               <p className="text-red-500 mt-4 text-center">{message}</p>
             )}
+
             {message === "Lawyers found" && (
               <div className="mt-12 mx-auto max-w-screen-xl">
                 <table className="min-w-full table-auto">
@@ -101,11 +142,13 @@ function AllLawyers({ isUserAuthenticated }) {
                             >
                               Contact Lawyer
                             </button>
+
                             <button className="px-2 py-1 bg-bpurple text-custom-text font-semibold rounded-lg hover:bg-purple-100">
                               Chat Room
                             </button>
                             <button className="px-2 py-1 bg-bpurple text-custom-text font-semibold rounded-lg hover:bg-purple-100">
                               Request Lawyer
+
                             </button>
                           </div>
                         </td>

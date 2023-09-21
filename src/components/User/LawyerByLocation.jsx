@@ -12,7 +12,8 @@ const LawyerByLocation = ({ isUserAuthenticated }) => {
   const [selectedContactInfo, setSelectedContactInfo] = useState(null);
   const [message, setMessage] = useState("");
   const [locationsList, setLocationsList] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState(""); // New state for selected location
+  const [selectedLocation, setSelectedLocation] = useState(""); 
+  const UserID = localStorage.getItem("userId");  // New state for selected location
 
   useEffect(() => {
     // Fetch the list of locations from the API
@@ -62,20 +63,60 @@ const LawyerByLocation = ({ isUserAuthenticated }) => {
       console.error("Error fetching data: ", error);
     }
   };
- const openLawyerInfo = (lawyer) => {
-   setSelectedLawyer(lawyer);
-   setSelectedContactInfo(null);
- };
+  const openLawyerInfo = (lawyer) => {
+    setSelectedLawyer(lawyer);
+    setSelectedContactInfo(null);
+  };
 
- const openContactInfo = (lawyer) => {
-   setSelectedContactInfo(lawyer);
-   setSelectedLawyer(null);
- };
+  const openContactInfo = (lawyer) => {
+    setSelectedContactInfo(lawyer);
+    setSelectedLawyer(null);
+  };
 
- const closeInfo = () => {
-   setSelectedLawyer(null);
-   setSelectedContactInfo(null);
- };
+  const closeInfo = () => {
+    setSelectedLawyer(null);
+    setSelectedContactInfo(null);
+  };
+
+  const sendRequest = (lawyer) => {
+    // Prepare the request data
+    const requestData = {
+      userid: UserID, // Replace with the actual user ID
+      lawyerid: lawyer._id,
+    };
+
+    // Send the POST request to the API
+    fetch("http://localhost:5000/api/user/sendRequest", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestData),
+    })
+      .then((response) => {
+        return response
+          .json()
+          .then((data) => {
+            if (response.ok) {
+              // Show an alert for successful responses (status code 200)
+              alert(data.message);
+            } else {
+              // Show an alert for client errors (status code 400)
+              alert(` ${data.message}`);
+            }
+            return data;
+          })
+          .catch((error) => {
+            console.error("Error parsing response:", error);
+            throw error;
+          });
+      })
+      .catch((error) => {
+        console.error("Error sending request:", error);
+        // Optionally, you can set an error message if the request fails
+        setMessage("Request failed");
+      });
+  };
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-4xl text-custom-text font-bold mb-4">
@@ -161,6 +202,7 @@ const LawyerByLocation = ({ isUserAuthenticated }) => {
                       >
                         Contact Lawyer
                       </button>
+
                       <button className="px-2 py-1 bg-bpurple text-custom-text font-semibold rounded-lg hover:bg-purple-100">
                         Chat Room
                       </button>
