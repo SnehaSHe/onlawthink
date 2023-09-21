@@ -148,6 +148,15 @@ const LawyerInfo = ({ isLawyerAuthenticated }) => {
       </h1>
       {lawyerData ? (
         <div>
+          <div>
+            {lawyerData.profileImage && (
+              <img
+                src={lawyerData.profileImage}
+                alt={`${lawyerData.firstName} ${lawyerData.lastName}`}
+                className="w-32 h-32 rounded-full mx-auto"
+              />
+            )}
+          </div>
           <p className="text-lg">
             Name: {lawyerData.firstName} {lawyerData.lastName}
           </p>
@@ -157,7 +166,7 @@ const LawyerInfo = ({ isLawyerAuthenticated }) => {
           <p className="text-lg">Location: {lawyerData.location}</p>
           <p className="text-lg">Year of Joining: {lawyerData.yearOfJoining}</p>
           <div>
-            <p className="text-lg">Bio:   {lawyerData.bio}</p>
+            <p className="text-lg">Bio: {lawyerData.bio}</p>
             <textarea
               className="border border-gray-300 p-2 mt-2"
               value={bio}
