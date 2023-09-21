@@ -63,7 +63,7 @@ const UserSignUp = () => {
             </div>
           )}
 
-          <div className="text-2xl font-serif font-bold text-custom-text mb-6 flex items-center">
+          <div className="text-3xl font-bold text-custom-text mb-6 flex items-center">
             Sign Up 
           </div>
 

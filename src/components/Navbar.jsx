@@ -48,7 +48,7 @@ const Navbar = ({
         isLawyerAuthenticated ||
         isJudgeAuthenticated ? (
           <button
-            className="hover:text-purple-400 transition duration-300"
+            className="text-1xl font-serif text-custom-text pr-4"
             onClick={handleLogout}
           >
             Log Out
