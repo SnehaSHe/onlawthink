@@ -65,9 +65,8 @@ export default function UserLogin({
         </div>
       )}
       <div className="bg-white p-8 rounded shadow-md w-80">
-        <h1 className="text-3xl font-serif font-bold text-custom-text text-center mb-4">
-          Login
-        </h1>
+
+        <h1 className="text-3xl font-bold text-custom-text text-center mb-4">Login</h1>
         <div className="mb-4">
           <label htmlFor="email" className="block text-sm font-semibold">
             Email Address:
@@ -95,7 +94,9 @@ export default function UserLogin({
           />
         </div>
         <button
-          className="block w-full bg-purple-900 text-white rounded-md py-2 hover:bg-blue-600 transition duration-300"
+
+          className="block w-full bg-purple-900 text-white rounded-md py-2 hover:bg-purple-800 transition duration-300"
+
           onClick={handleLogin}
         >
           Login

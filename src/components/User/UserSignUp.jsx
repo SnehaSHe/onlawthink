@@ -49,7 +49,9 @@ const UserSignUp = () => {
   return (
     <div className="min-h-screen bg-white-100 pt-10">
       <div className="flex justify-center items-center">
-        <div className="bg-white w-full max-w-md rounded-lg border border-purple shadow-md shadow-lg p-8 space-y-6">
+
+      <div className="bg-white w-full max-w-md rounded-lg border border-purple shadow-md shadow-lg p-8 space-y-6">
+
           {alertMessage && (
             <div
               className={`${
@@ -62,8 +64,8 @@ const UserSignUp = () => {
             </div>
           )}
 
-          <div className="text-2xl font-serif font-bold text-custom-text mb-6 flex items-center">
-            Sign Up
+          <div className="text-3xl font-bold text-custom-text mb-6 flex items-center">
+            Sign Up 
           </div>
 
           <form onSubmit={handleSubmit}>

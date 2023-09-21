@@ -19,7 +19,7 @@ export default function LandingPage({
 
   return (
     <div className="bg-white h-screen flex justify-center items-center">
-      <div className="bg-white p-12 rounded border border-purple shadow-md shadow-lg p-12 space-y-6">
+    <div className="bg-white p-12 rounded border border-purple shadow-md shadow-lg p-12 space-y-6">
         <h1 className="text-3xl font-bold text-center text-custom-text mb-4 pb-12">
           Choose Your Role
         </h1>

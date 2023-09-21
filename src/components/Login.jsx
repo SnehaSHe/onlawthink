@@ -61,7 +61,7 @@ function Login({
   };
 
   return (
-    <div className="min-h-screen bg-pink-100 flex justify-center items-center">
+    <div className="min-h-screen flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl font-semibold text-darkpurple mb-6">Login</h2>
         {alertMessage && (

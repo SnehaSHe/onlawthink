@@ -65,9 +65,9 @@ export default function LawyerLogin({
         </div>
       )}
       <div className="bg-white p-12 rounded border border-purple shadow-md shadow-lg p-12 space-y-6">
-        <h1 className="text-3xl font-serif font-bold text-center text-custom-text mb-4">
-          Login
-        </h1>
+
+        <h1 className="text-3xl font-serif font-bold text-center text-custom-text mb-4">Login</h1>
+
         <div className="mb-4">
           <label htmlFor="email" className="block text-sm font-semibold">
             Email Address:

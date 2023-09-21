@@ -55,7 +55,8 @@ const LawyerSignUp = () => {
   return (
     <div className="min-h-screen pt-10">
       <div className="flex justify-center items-center">
-        <div className="bg-white w-full max-w-md rounded-lg border border-purple shadow-md shadow-lg p-8 space-y-6">
+      <div className="bg-white w-full max-w-md rounded-lg border border-purple shadow-md shadow-lg p-8 space-y-6">
+
           {alertMessage && (
             <div
               className={`${
@@ -226,7 +227,9 @@ const LawyerSignUp = () => {
           </form>
           <Link to="login">
             <button className="w-full mt-4 bg-purple-900 text-white font-bold py-2 rounded-md hover:bg-purple-700">
-              Login
+
+              Login 
+
             </button>
           </Link>
         </div>
