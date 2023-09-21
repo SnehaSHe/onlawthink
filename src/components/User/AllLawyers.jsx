@@ -84,7 +84,6 @@ function AllLawyers({ isUserAuthenticated }) {
       {isUserAuthenticated ? (
         <>
           <div className="relative">
-
             <h1 className="text-4xl text-custom-text font-bold mt-0 mx-auto mb-0">
               Available Lawyers
             </h1>
@@ -146,9 +145,11 @@ function AllLawyers({ isUserAuthenticated }) {
                             <button className="px-2 py-1 bg-bpurple text-custom-text font-semibold rounded-lg hover:bg-purple-100">
                               Chat Room
                             </button>
-                            <button className="px-2 py-1 bg-bpurple text-custom-text font-semibold rounded-lg hover:bg-purple-100">
-                              Request Lawyer
-
+                            <button
+                              className="px-2 py-1 bg-bpurple text-custom-text font-semibold rounded-lg hover:bg-purple-100"
+                              onClick={() => sendRequest(lawyer)}
+                            >
+                              Request Lawyer to Lawyer
                             </button>
                           </div>
                         </td>

@@ -162,7 +162,9 @@ const LawyerByCaseDomain = ({ isUserAuthenticated }) => {
         </Link>
       </div>
 
-      {message && <p className="text-custom-text font-medium mb-4">{message}</p>}
+      {message && (
+        <p className="text-custom-text font-medium mb-4">{message}</p>
+      )}
 
       {lawyers.length > 0 && (
         <div className="mt-12 mx-auto max-w-screen-xl">
@@ -205,9 +207,11 @@ const LawyerByCaseDomain = ({ isUserAuthenticated }) => {
                       <button className="px-2 py-1 bg-bpurple text-custom-text font-semibold rounded-lg hover:bg-purple-100">
                         Chat Room
                       </button>
-                      <button className="px-2 py-1 bg-bpurple text-custom-text font-semibold rounded-lg hover:bg-purple-100">
-                        Request Lawyer
-
+                      <button
+                        className="px-2 py-1 bg-bpurple text-custom-text font-semibold rounded-lg hover:bg-purple-100"
+                        onClick={() => sendRequest(lawyer)}
+                      >
+                        Send Request to Lawyer
                       </button>
                     </div>
                   </td>
