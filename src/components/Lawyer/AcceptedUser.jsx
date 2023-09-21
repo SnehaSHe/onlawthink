@@ -1,75 +1,60 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const AcceptedUser = () => {
   const [acceptedUsers, setAcceptedUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const lawyerID = localStorage.getItem("lawyerId");
 
   useEffect(() => {
-    // Fetch accepted users data from the API
-    fetch("http://localhost:5000/api/lawyer/getAcceptedRequests")
-      .then((response) => response.json())
-      .then((data) => {
-        setAcceptedUsers(data.acceptedUsers);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setIsLoading(false);
-      });
-  }, []);
+    // Fetch accepted users based on lawyerID
+    const fetchAcceptedUsers = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/lawyer/getAcceptedRequests/${lawyerID}`
+        );
+        const data = await response.json();
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+        if (response.ok) {
+          setAcceptedUsers(data.acceptedUsers);
+        } else {
+          // Handle error here if needed
+          console.error("Failed to fetch accepted users");
+        }
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAcceptedUsers();
+  }, [lawyerID]);
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Accepted Users</h2>
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead>
-          <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Name
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Email
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Account Type
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Phone Number
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Chat Room
-            </th>
-          </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
+    <div className="container mx-auto p-4">
+      <h1 className="text-4xl text-purple-800 font-bold mb-4">
+        Accepted Clients
+      </h1>
+      {loading ? (
+        <p className="text-lg">Loading accepted clients...</p>
+      ) : acceptedUsers.length > 0 ? (
+        <div>
           {acceptedUsers.map((user) => (
-            <tr key={user._id}>
-              <td className="px-6 py-4 whitespace-nowrap">
-                {user.firstName} {user.lastName}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                {user.emailAddress}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                {user.accountType}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">{user.phoneNo}</td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <button
-                  className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
-                  onClick={() => handleChatRoomButtonClick(user)}
-                >
-                  Chat Room
-                </button>
-              </td>
-            </tr>
+            <div key={user._id} className="border border-gray-300 p-4 mb-4">
+              <p className="text-lg">
+                Name: {user.firstName} {user.lastName}
+              </p>
+              <p className="text-lg">Email Address: {user.emailAddress}</p>
+              <p className="text-lg">Phone Number: {user.phoneNo}</p>
+              <button className="px-2 py-1 bg-red-500 text-white rounded-lg hover:bg-green-600">
+                Chat with the client
+              </button>
+            </div>
           ))}
-        </tbody>
-      </table>
+        </div>
+      ) : (
+        <div className="text-lg">No accepted clients.</div>
+      )}
     </div>
   );
 };
