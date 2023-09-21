@@ -26,37 +26,46 @@ const LawyerRequest = () => {
   }, []);
 
   // Handle PATCH request when the button is clicked
-  const handleToggleRequest = async (notificationId, acceptStatus) => {
-    try {
-      const response = await fetch(
-        "http://localhost:5000/api/lawyer/acceptRequest",
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ notificationId, acceptStatus }),
-        }
-      );
+ const handleToggleRequest = async (notificationId, acceptStatus) => {
+   try {
+     const response = await fetch(
+       "http://localhost:5000/api/lawyer/acceptRequest",
+       {
+         method: "PATCH",
+         headers: {
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify({ notificationId, acceptStatus }),
+       }
+     );
 
-      if (response.ok) {
-        // Request was successfully accepted or rejected
-        const updatedRequests = requests.map((request) => {
-          if (request.notification._id === notificationId) {
-            request.notification.acceptStatus = acceptStatus;
-          }
-          return request;
-        });
+     if (response.ok) {
+       // Request was successfully accepted or rejected
+       const updatedRequests = requests.map((request) => {
+         if (request.notification._id === notificationId) {
+           request.notification.acceptStatus = acceptStatus;
+         }
+         return request;
+       });
 
-        setRequests(updatedRequests);
-      } else {
-        // Handle request failure
-        console.error("Failed to toggle request");
-      }
-    } catch (error) {
-      console.error("Error toggling request:", error);
-    }
-  };
+       setRequests(updatedRequests);
+
+       // Notify success using an alert
+       alert("Request successfully accepted .");
+     } else {
+       // Handle request failure and notify using an alert
+       console.error("Already accepted request of user");
+       alert("Already accepted request of user .");
+     }
+   } catch (error) {
+     // Handle any exceptions and notify using an alert
+     console.error("Error toggling request:", error);
+     alert(
+       "An error occurred while toggling the request. Please try again later."
+     );
+   }
+ };
+
 
   return (
     <div className="bg-blue-200 p-4 rounded-lg shadow-lg">
@@ -86,12 +95,12 @@ const LawyerRequest = () => {
                 </button>
               ) : (
                 <button
-                  className="bg-red-500 text-white py-2 px-4 rounded-lg mr-2"
+                  className="bg-yellow-500 text-white py-2 px-4 rounded-lg mr-2"
                   onClick={() =>
                     handleToggleRequest(request.notification._id, false)
                   }
                 >
-                  Reject
+                  accepted
                 </button>
               )}
             </div>

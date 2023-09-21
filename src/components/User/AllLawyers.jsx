@@ -58,7 +58,7 @@ function AllLawyers({ isUserAuthenticated }) {
         return response
           .json()
           .then((data) => {
-            if (response.status===200) {
+            if (response.ok) {
               // Show an alert for successful responses (status code 200)
               alert(data.message);
             } else {
@@ -84,8 +84,20 @@ function AllLawyers({ isUserAuthenticated }) {
       {isUserAuthenticated ? (
         <>
           <div className="relative">
+            <div className="absolute top-0 right-0 mt-20 mr-8 flex items-center space-x-3 mt-10">
+              <Link to="/search-lawyer-by-case">
+                <button className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">
+                  Lawyers by case Domain
+                </button>
+              </Link>
+              <Link to="/search-lawyer-by-location">
+                <button className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-purple-600">
+                  Lawyer By Location
+                </button>
+              </Link>
+            </div>
             <h1 className="text-4xl text-purple-800 font-bold mt-0 mx-auto mb-0">
-              {`Available Lawyers ${UserID}`}
+              Available Lawyers
             </h1>
 
             {message === "Lawyers found" && (
@@ -130,6 +142,9 @@ function AllLawyers({ isUserAuthenticated }) {
                               onClick={() => sendRequest(lawyer)}
                             >
                               send request
+                            </button>
+                            <button className="px-2 py-1 bg-red-500 text-white rounded-lg hover:bg-green-600">
+                              Chat with the Lawyer
                             </button>
                           </div>
                         </td>
