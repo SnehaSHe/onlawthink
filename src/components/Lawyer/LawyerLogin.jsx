@@ -66,7 +66,7 @@ export default function LawyerLogin({
       )}
       <div className="bg-white p-12 rounded border border-purple shadow-md shadow-lg p-12 space-y-6">
 
-        <h1 className="text-3xl font-serif font-bold text-center text-custom-text mb-4">Login</h1>
+        <h1 className="text-3xl  font-bold text-center text-custom-text mb-4">Login</h1>
 
         <div className="mb-4">
           <label htmlFor="email" className="block text-sm font-semibold">
@@ -95,7 +95,7 @@ export default function LawyerLogin({
           />
         </div>
         <button
-          className="block w-full bg-purple-900 text-white rounded-md py-2 hover:bg-blue-600 transition duration-300"
+          className="block w-full bg-purple-900 text-white rounded-md py-2 hover:bg-purple-800 transition duration-300"
           onClick={handleLogin}
         >
           Login

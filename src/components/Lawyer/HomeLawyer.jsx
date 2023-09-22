@@ -13,23 +13,25 @@ function HomeLawyer({ isLawyerAuthenticated }) {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-4xl font-bold mb-6">Welcome, Lawyer!</h1>
+      <div className="bg-white p-12 rounded border border-purple shadow-md shadow-lg p-12 space-y-6">
+      <h1 className="text-4xl font-bold text-center text-custom-text mb-6">Welcome, Lawyer!</h1>
       <div className="space-y-4">
         <Link to="/lawyer-info">
-          <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mr-3">
+          <button className="bg-custom-purple hover:bg-purple-100 text-custom-text font-semibold px-4 py-2 rounded-md mr-3">
             My Info
           </button>
         </Link>
         <Link to="/lawyer-requests">
-          <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md mr-3">
+          <button className="bg-custom-purple hover:bg-purple-100 text-custom-text font-semibold px-4 py-2 rounded-md mr-3">
             My Requests
           </button>
         </Link>
         <Link to="/lawyer-accepted-users">
-          <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md mr-3">
+          <button className="bg-custom-purple hover:bg-purple-100 text-custom-purple font-semibold px-4 py-2 rounded-md mr-3">
             Accepted Users
           </button>
         </Link>
+        </div>
       </div>
     </div>
   );

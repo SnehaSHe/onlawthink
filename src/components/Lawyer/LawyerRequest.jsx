@@ -68,13 +68,13 @@ const LawyerRequest = () => {
 
 
   return (
-    <div className="bg-blue-200 p-4 rounded-lg shadow-lg">
+    <div className="bgwhite p-4 rounded-lg shadow-lg">
       <h1 className="text-2xl font-bold mb-4">Lawyer Requests</h1>
       <div className="mt-4">
         {requests.map((request) => (
           <div
             key={request.notification._id}
-            className="bg-white p-3 rounded-lg shadow mb-2 flex justify-between"
+            className="bg-custom-purple p-3 rounded-lg shadow mb-2 flex justify-between"
           >
             <div>
               <p className="font-semibold">
@@ -86,7 +86,7 @@ const LawyerRequest = () => {
             <div>
               {request.notification.acceptStatus === false ? (
                 <button
-                  className="bg-green-500 text-white py-2 px-4 rounded-lg mr-2"
+                  className="bg-purple-900 font-medium text-white py-2 px-4 rounded-lg mr-2"
                   onClick={() =>
                     handleToggleRequest(request.notification._id, true)
                   }
@@ -95,12 +95,12 @@ const LawyerRequest = () => {
                 </button>
               ) : (
                 <button
-                  className="bg-yellow-500 text-white py-2 px-4 rounded-lg mr-2"
+                  className="bg-bpurple text-custom-text font-medium py-2 px-4 rounded-lg mr-2"
                   onClick={() =>
                     handleToggleRequest(request.notification._id, false)
                   }
                 >
-                  accepted
+                  Accepted
                 </button>
               )}
             </div>

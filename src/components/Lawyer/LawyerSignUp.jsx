@@ -69,7 +69,7 @@ const LawyerSignUp = () => {
             </div>
           )}
 
-          <div className="text-2xl font-serif font-bold text-custom-text mb-6 flex items-center">
+          <div className="text-3xl font-bold text-custom-text mb-6 flex items-center">
             Sign Up
           </div>
 
@@ -219,14 +219,14 @@ const LawyerSignUp = () => {
             <div>
               <button
                 type="submit"
-                className="w-full bg-purple-900 text-white font-bold py-2 rounded-md hover:bg-purple-900 mt-5"
+                className="w-full bg-purple-900 text-white font-bold py-2 rounded-md hover:bg-purple-800 mt-5"
               >
                 Create Account
               </button>
             </div>
           </form>
           <Link to="login">
-            <button className="w-full mt-4 bg-purple-900 text-white font-bold py-2 rounded-md hover:bg-purple-700">
+            <button className="w-full mt-4 bg-purple-900 text-white font-bold py-2 rounded-md hover:bg-purple-800">
 
               Login 
 

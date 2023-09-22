@@ -95,7 +95,7 @@ export default function JudgeLogin({
           />
         </div>
         <button
-          className="block w-full bg-purple-900 text-white rounded-md py-2 hover:bg-blue-600 transition duration-300"
+          className="block w-full bg-purple-900 text-white rounded-md py-2 hover:bg-purple-800 transition duration-300"
           onClick={handleLogin}
         >
           Login

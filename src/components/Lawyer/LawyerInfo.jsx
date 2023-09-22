@@ -143,7 +143,7 @@ const LawyerInfo = ({ isLawyerAuthenticated }) => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-4xl text-black-800 font-bold mb-4">
+      <h1 className="text-3xl text-center text-custom-text font-bold mb-4">
         Lawyer Information displayed to client
       </h1>
       {lawyerData ? (
@@ -158,29 +158,48 @@ const LawyerInfo = ({ isLawyerAuthenticated }) => {
             )}
           </div>
           <p className="text-lg">
-            Name: {lawyerData.firstName} {lawyerData.lastName}
-          </p>
-          <p className="text-lg">Email Address: {lawyerData.emailAddress}</p>
-          <p className="text-lg">Phone Number: {lawyerData.phoneNo}</p>
-          <p className="text-lg">Case Domain: {lawyerData.caseDomain}</p>
-          <p className="text-lg">Location: {lawyerData.location}</p>
-          <p className="text-lg">Year of Joining: {lawyerData.yearOfJoining}</p>
+  <span className="text-custom-text font-bold">Name:</span>{" "}
+  <span className="text-cblack">
+    {lawyerData.firstName} {lawyerData.lastName}
+  </span>
+</p>
+<p className="text-lg">
+  <span className="text-custom-text font-bold">Email Address:</span>{" "}
+  <span className="text-black">{lawyerData.emailAddress}</span>
+</p>
+<p className="text-lg">
+  <span className="text-custom-text font-bold">Phone Number:</span>{" "}
+  <span className="text-black">{lawyerData.phoneNo}</span>
+</p>
+<p className="text-lg">
+  <span className="text-custom-text font-bold">Case Domain:</span>{" "}
+  <span className="text-black">{lawyerData.caseDomain}</span>
+</p>
+<p className="text-lg">
+  <span className="text-custom-text font-bold">Location:</span>{" "}
+  <span className="text-black">{lawyerData.location}</span>
+</p>
+<p className="text-lg">
+  <span className="text-custom-text font-bold">Year of Joining:</span>{" "}
+  <span className="text-black">{lawyerData.yearOfJoining}</span>
+</p>
+
           <div>
-            <p className="text-lg">Bio: {lawyerData.bio}</p>
+            <p className="text-lg font-bold text-custom-text">Bio: {lawyerData.bio}</p>
             <textarea
               className="border border-gray-300 p-2 mt-2"
               value={bio}
               onChange={(e) => setBio(e.target.value)}
             ></textarea>
             <button
-              className="bg-blue-500 text-white p-2 mt-2 ml-10"
+              className="bg-purple-900 text-white font-medium rounded-lg p-2 mt-2 ml-10"
               onClick={handleBioUpdate}
             >
               Update Bio
             </button>
           </div>
           <div>
-            <p className="text-lg">Achievements:</p>
+            <p className="text-lg font-bold text-custom-text">Achievements:</p>
             <ul className="list-disc ml-6">
               {achievements.map((achievement, index) => (
                 <li key={index} className="text-lg">
@@ -195,14 +214,14 @@ const LawyerInfo = ({ isLawyerAuthenticated }) => {
               onChange={(e) => setNewAchievement(e.target.value)}
             />
             <button
-              className="bg-blue-500 text-white p-2 mt-2 ml-10"
+              className="bg-purple-900 text-white font-medium rounded-lg p-2 mt-2 ml-10"
               onClick={handleAchievementsUpdate}
             >
               Add Achievement
             </button>
           </div>
           <div>
-            <p className="text-lg">Qualifications:</p>
+            <p className="text-lg font-bold text-custom-text">Qualifications:</p>
             <ul className="list-disc ml-6">
               {qualifications.map((qualification, index) => (
                 <li key={index} className="text-lg">
@@ -217,7 +236,7 @@ const LawyerInfo = ({ isLawyerAuthenticated }) => {
               onChange={(e) => setNewQualification(e.target.value)}
             />
             <button
-              className="bg-blue-500 text-white p-2 mt-2 ml-10"
+              className="bg-purple-900 text-white font-medium rounded-lg p-2 mt-2 ml-10"
               onClick={handleQualificationsUpdate}
             >
               Add Qualification
