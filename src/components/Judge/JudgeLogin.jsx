@@ -20,7 +20,7 @@ export default function JudgeLogin({
         body: JSON.stringify({
           emailAddress,
           password,
-          accountType: "judge", // Default account type as user
+          accountType: "Judge", // Default account type as user
         }),
       });
 
@@ -30,7 +30,7 @@ export default function JudgeLogin({
         // If the response status is OK (2xx), it's a successful login
         setAlertType("success");
         setAlertMessage("Login successful");
-        localStorage.setItem("judgeId", data.user._id);
+        localStorage.setItem("judgeId", data.Judge._id);
 
         // Update the authentication state to true
         setIsJudgeAuthenticated(true);

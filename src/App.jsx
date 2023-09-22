@@ -54,7 +54,6 @@ export default function App() {
         />
         <Route path="/user" element={<UserSignUp />} />
         <Route path="/lawyer" element={<LawyerSignUp />} />
-        <Route path="/judge" element={<LawyerSignUp />} />
         <Route path="/judge" element={<JudgeSignUp />} />
         <Route
           path="/SuperAdmin/login"
@@ -89,6 +88,10 @@ export default function App() {
         <Route
           path="/home-user"
           element={<HomeUser isUserAuthenticated={isUserAuthenticated} />}
+        />
+        <Route
+          path="/home-judge"
+          element={<HomeJudge isJudgeAuthenticated={isJudgeAuthenticated} />}
         />
         <Route
           path="/all-lawyers"
