@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const SignUp = () => {
+const SuperAdminSignUp = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     emailAddress: "",
     password: "",
-    accountType: "user",
+    accountType: "superAdmin",
     phoneNo: "",
   });
 
@@ -33,13 +33,13 @@ const SignUp = () => {
         body: JSON.stringify(formData),
       });
 
-     if (response.ok) {
-       const data = await response.json();
-       setAlertMessage(data.message);
-     } else {
-       console.error("Sign-up request failed.");
-       setAlertMessage("User Already Registered"); // Clear any previous success message
-     }
+      if (response.ok) {
+        const data = await response.json();
+        setAlertMessage(data.message);
+      } else {
+        console.error("Sign-up request failed.");
+        setAlertMessage("User Already Registered"); // Clear any previous success message
+      }
     } catch (error) {
       console.error("Error:", error);
       setAlertMessage("Signup Failed"); // Clear any previous success message
@@ -197,4 +197,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SuperAdminSignUp;
