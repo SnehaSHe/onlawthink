@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function HomeJudge({ isLawyerAuthenticated }) {
+function HomeJudge({ isJudgeAuthenticated }) {
   const navigate = useNavigate();
 
-  if (!isLawyerAuthenticated) {
+  if (!isJudgeAuthenticated) {
     // If the lawyer is not authenticated, redirect to "/"
     navigate("/");
     return null; // Return null or a loading indicator while the redirect is happening
@@ -12,7 +12,10 @@ function HomeJudge({ isLawyerAuthenticated }) {
 
   return (
     <>
-      <p>Hi</p>
+      <div>
+
+        Hello Judge !!!!!!!!
+      </div>
       {/* Add the rest of your content here */}
     </>
   );

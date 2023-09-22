@@ -7,7 +7,7 @@ const JudgeSignUp = () => {
     lastName: "",
     emailAddress: "",
     password: "",
-    accountType: "judge",
+    accountType: "Judge",
     phoneNo: "",
     caseDomain: "",
     location: "",
@@ -28,23 +28,20 @@ const JudgeSignUp = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/judge/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch("http://localhost:5000/api/judge/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (response.ok) {
         const data = await response.json();
         setAlertMessage(data.message);
       } else {
         console.error("Sign-up request failed.");
-        setAlertMessage("User Already Registered"); // Clear any previous success message
+        setAlertMessage("Judge Already Registered"); // Clear any previous success message
       }
     } catch (error) {
       console.error("Error:", error);

@@ -42,6 +42,12 @@ export default function LandingPage({
           >
             Judge
           </Link>
+          <Link
+            to="/superAdmin/login"
+            className="block px-4 font-serif py-2 bg-custom-purple text-custom-text rounded hover:bg-purple-200 transition duration-300"
+          >
+            Super Admin
+          </Link>
         </div>
       </div>
     </div>

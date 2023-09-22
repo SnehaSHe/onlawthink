@@ -15,14 +15,18 @@ import LawyerByLocation from "./components/User/LawyerByLocation";
 import AllLawyers from "./components/User/AllLawyers";
 import LawyerRequest from "./components/Lawyer/LawyerRequest";
 import AcceptedUser from "./components/Lawyer/AcceptedUser";
+import SuperAdminSignUp from "./components/SuperAdmin/SuperAdminSignUp";
+
 import Navbar from "./components/Navbar";
 import "./index.css";
 import LawyerByCaseDomain from "./components/User/LawyerByCaseDomain";
+import SuperAdminLogin from "./components/SuperAdmin/SuperAdminLogin";
 
 export default function App() {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
   const [isLawyerAuthenticated, setIsLawyerAuthenticated] = useState(false);
   const [isJudgeAuthenticated, setIsJudgeAuthenticated] = useState(false);
+  const [isSuperAdminAuthenticated, setIsSuperAdminAuthenticated] = useState(false);
 
   return (
     <div>
@@ -50,8 +54,16 @@ export default function App() {
         />
         <Route path="/user" element={<UserSignUp />} />
         <Route path="/lawyer" element={<LawyerSignUp />} />
-        <Route path="/judge" element={<LawyerSignUp />} />
         <Route path="/judge" element={<JudgeSignUp />} />
+        <Route
+          path="/SuperAdmin/login"
+          element={
+            <SuperAdminLogin
+              isSuperAdminAuthenticated={isSuperAdminAuthenticated}
+              setIsSuperAdminAuthenticated={setIsSuperAdminAuthenticated}
+            />
+          }
+        />
         <Route
           path="/search-lawyer-by-location"
           element={
@@ -76,6 +88,10 @@ export default function App() {
         <Route
           path="/home-user"
           element={<HomeUser isUserAuthenticated={isUserAuthenticated} />}
+        />
+        <Route
+          path="/home-judge"
+          element={<HomeJudge isJudgeAuthenticated={isJudgeAuthenticated} />}
         />
         <Route
           path="/all-lawyers"
@@ -109,14 +125,16 @@ export default function App() {
         />
         <Route
           path="/lawyer-requests"
-          element={<LawyerRequest isLawyerAuthenticated={isLawyerAuthenticated} />}
+          element={
+            <LawyerRequest isLawyerAuthenticated={isLawyerAuthenticated} />
+          }
         />
         <Route
           path="/lawyer-accepted-users"
-          element={<AcceptedUser isLawyerAuthenticated={isLawyerAuthenticated} />}
+          element={
+            <AcceptedUser isLawyerAuthenticated={isLawyerAuthenticated} />
+          }
         />
-
-        
       </Routes>
     </div>
   );

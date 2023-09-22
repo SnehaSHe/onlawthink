@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function JudgeLogin({
-  setIsJudgeAuthenticated, // You can use this function to update the authentication state
+export default function SuperAdminLogin({
+  setIsSuperAdminAuthenticated, // You can use this function to update the authentication state
 }) {
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +20,7 @@ export default function JudgeLogin({
         body: JSON.stringify({
           emailAddress,
           password,
-          accountType: "Judge", // Default account type as user
+          accountType: "judge", // Default account type as user
         }),
       });
 
@@ -30,7 +30,7 @@ export default function JudgeLogin({
         // If the response status is OK (2xx), it's a successful login
         setAlertType("success");
         setAlertMessage("Login successful");
-        localStorage.setItem("judgeId", data.Judge._id);
+        localStorage.setItem("judgeId", data.user._id);
 
         // Update the authentication state to true
         setIsJudgeAuthenticated(true);
@@ -95,7 +95,7 @@ export default function JudgeLogin({
           />
         </div>
         <button
-          className="block w-full bg-purple-900 text-white rounded-md py-2 hover:bg-purple-800 transition duration-300"
+          className="block w-full bg-purple-900 text-white rounded-md py-2 hover:bg-blue-600 transition duration-300"
           onClick={handleLogin}
         >
           Login
